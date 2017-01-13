@@ -13,9 +13,9 @@ const routes = [
     { path: '/tokens', component: Tokens }
 ]
 
-const router = new VueRouter(
+const router = new VueRouter({
   routes
-)
+})
 
 Vue.use(VueMaterial)
 Vue.use(VueRouter)
