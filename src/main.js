@@ -5,6 +5,17 @@ import App from './App'
 import VueMaterial from 'vue-material'
 import 'vue-material/dist/vue-material.css'
 import VueRouter from 'vue-router'
+import Tokens from 'components/Tokens'
+import Todos from 'components/Tokens'
+
+const routes = [
+    { path: '/foo', component: Todos },
+    { path: '/bar', component: Tokens }
+]
+
+const routes = new VueRouter({
+  routes
+})
 
 Vue.use(VueMaterial)
 Vue.use(VueRouter)
