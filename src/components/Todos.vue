@@ -18,7 +18,8 @@
   }
 </style>
 <script>
-var STOARGE_KEY =todosvue_token
+  var STORAGE_KEY = 'todosvue_token'
+  var AUTH_CLIENT_ID = '4'
   export default{
     data () {
       return {
@@ -27,6 +28,9 @@ var STOARGE_KEY =todosvue_token
       }
     },
     created () {
+      var token = this.extractToken(document.location.hash)
+      console.log(token)
+      if (token) this.saveToken(token)
       console.log(this.fetchToken())
       if (this.fetchToken()) {
         this.authorized = true
@@ -47,22 +51,26 @@ var STOARGE_KEY =todosvue_token
           console.log('Error')
         })
       },
+      extractToken: function (hash) {
+        var match = hash.match(/access_token=(\w+)/)
+        return !!match && match[1]
+      },
       connect: function () {
         console.log('Connect here')
-        'client_id' => '3',
-        //És localhost (només una redirecció).
-        'redirect_uri' => 'http://oauthclient.dev:8001/implicit',
-        'response_type' => 'token', //implicit
-        'scope' => '',
-        var query = 'client_id=' + AUTH_CLIENT_ID + '&redirect_uri=' + window.location + '&response_type=token&scope='
-         console.log(query)
+        query = {
+          client_id: AUTH_CLIENT_ID,
+          redirect_uri: String(window.location),
+          response_type: 'token', // implicit
+          scope: ''
+        }
+        var query = window.querystring.stringify(query)
         window.location.replace('http://todos.dev:8000/oauth/authorize?' + query)
       },
       fetchToken: function () {
         return window.localStorage.getItem(STORAGE_KEY)
       },
-      save: function (toKEN) {
-        window.localStorage.setItem(STORAGE_KEY, this.token)
+      saveToken: function (token) {
+        window.localStorage.setItem(STORAGE_KEY, token)
       }
     }
   }
