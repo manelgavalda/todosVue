@@ -1,7 +1,7 @@
 <template>
     <div>
-        <div>
-            <md-button class="md-raised md-primary">Connect</md-button>
+        <div v-show="!authorized">
+            <md-button class="md-raised md-primary" @click="connect">Connect</md-button>
             <div>
               <ul>
                 <li v-for="(todo, index) in todos">
@@ -18,11 +18,12 @@
   }
 </style>
 <script>
+// Local Storage: Session Storage
   export default{
     data () {
       return {
-        msg: 'Todos here',
-        todos: []
+        todos: [],
+        authorized: false
       }
     },
     created () {
@@ -38,9 +39,12 @@
           console.log(response.data)
           this.todos = response.data.data
         }, (response) => {
-          // SweetAlert('Oops...', 'Something went wrong!', 'error')
+          // sweetAlert('Oops...', 'Something went wrong!', 'error')
           console.log('Error')
         })
+      },
+      connect: function () {
+        console.log('Connect here')
       }
     }
   }
