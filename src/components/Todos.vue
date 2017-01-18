@@ -18,7 +18,6 @@
   }
 </style>
 <script>
-// Local Storage: Session Storage
   export default{
     data () {
       return {
@@ -27,8 +26,12 @@
       }
     },
     created () {
-      console.log('Provant')
-      this.fetchData()
+      console.log(this.fetchToken())
+      if (this.fetchToken()) {
+        this.authorized = true
+      } else {
+        this.authorized = false
+      }
     },
     methods: {
       fetchData: function () {
@@ -45,6 +48,12 @@
       },
       connect: function () {
         console.log('Connect here')
+      },
+      fetchToken: function () {
+        return window.localStorage.getItem(window.STORAGE_KEY)
+      },
+      save: function (toKEN) {
+        window.localStorage.setItem(window.STORAGE_KEY, this.token)
       }
     }
   }
