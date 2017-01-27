@@ -7,7 +7,7 @@ const routes = [
   { path: '/todos', component: Todos },
   { path: '/tokens', component: Tokens },
   { path: '/profile', component: Profile },
-    {path: '*', component: NotFound }
+  { path: '*', component: NotFound }
 ]
 
 export default routes
