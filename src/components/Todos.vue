@@ -57,16 +57,14 @@
   }
 </style>
 <script>
-  // var AUTH_CLIENT_ID = '4'
-  // var AUTH_REDIRECT_URI = 'http://localhost:8095/todos'
   var API_URL = 'http://todos.dev:8080/api/v1/task'
+  var STORAGE_KEY = 'todosvue_token'
 
   export default{
     data () {
       return {
         todos: [],
-        connectin: true,
-        connecting: false,
+        connecting: true,
         total: 0,
         perPage: 0,
         page: 0
@@ -84,18 +82,21 @@
         return this.fetchPage(1)
       },
       fetchPage: function (page) {
+        this.$http.defaults.headers.common['Authorization'] = 'Bearer ' + window.localStorage.getItem(STORAGE_KEY)
         this.$http.get(API_URL + '?page=' + page).then((response) => {
+          this.connecting = false
           this.todos = response.data.data
-          console.log(response.data)
-          console.log(typeof response.data.total)
           this.total = response.data.total
           this.perPage = response.data.per_page
           this.page = response.data.current_page
         }, (response) => {
-          console.log('ERROR DATA: ' + response.data)
+          this.connecting = false
           this.showConnectionError()
           this.authorized = false
         })
+      },
+      showConnectionError () {
+        this.$refs.connectionError.open()
       },
       onPagination: function () {
         console.log('pagination todo!')
