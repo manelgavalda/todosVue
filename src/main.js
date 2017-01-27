@@ -24,12 +24,18 @@ const router = new VueRouter({
 })
 
 router.beforeEach((to, from, next) => {
-  console.log('a provar')
+  console.log('Prova')
+  console.log(to)
+  console.log(from)
   var logged = true
-  if (logged) {
+  if (to.path === '/login') {
     next()
-  } else {
-    next('/login')
+    logged = false
+    if (logged) {
+      next()
+    } else {
+      next('/login')
+    }
   }
 })
 
