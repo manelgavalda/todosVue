@@ -1,11 +1,11 @@
 <template>
     <div>
-        <div v-show="!authorized">
-            <md-button class="md-raised md-primary" @click="connect">Connect</md-button>
-        </div>
-        <div v-show="authorized">
-            <md-button class="md-raised md-primary" @click="logout">Logout</md-button>
-        </div>
+        <!--<div v-show="!authorized">-->
+            <!--<md-button class="md-raised md-primary" @click="connect">Connect</md-button>-->
+        <!--</div>-->
+        <!--<div v-show="authorized">-->
+            <!--<md-button class="md-raised md-primary" @click="logout">Logout</md-button>-->
+        <!--</div>-->
         <div>
             <md-table-card>
                 <md-toolbar>
@@ -64,7 +64,7 @@
     data () {
       return {
         todos: [],
-        connecting: true,
+        connecting: false,
         total: 0,
         perPage: 0,
         page: 0
@@ -92,7 +92,7 @@
         }, (response) => {
           this.connecting = false
           this.showConnectionError()
-          this.authorized = false
+          // this.authorized = false
         })
       },
       showConnectionError () {
