@@ -16,8 +16,9 @@
         <md-table-header>
           <md-table-row>
             <md-table-head md-sort-by="name">Name</md-table-head>
-            <md-table-head md-sort-by="priority">Priority</md-table-head>
-            <md-table-head md-sort-by="done" md-numeric>Done</md-table-head>
+            <md-table-head md-sort-by="priority" md-numeric>Priority</md-table-head>
+            <md-table-head md-sort-by="done" >Done</md-table-head>
+            <md-table-head md-sort-by="actions">Actions</md-table-head>
           </md-table-row>
         </md-table-header>
 
@@ -28,6 +29,14 @@
             <md-table-cell>{{ index +1 }} {{ todo.name }}</md-table-cell>
             <md-table-cell>{{ todo.priority }}</md-table-cell>
             <md-table-cell>{{ todo.done }}</md-table-cell>
+            <md-table-cell>
+              <span class="btn btn-md btn-danger"  @click="deleteTodo(index,todo.id)">
+                <md-icon>delete_forever</md-icon>
+              </span>
+              <span class="btn btn-md btn-info" @click="editTodo(index,todo.id)">
+                <md-icon>edit</md-icon>
+              </span>
+            </md-table-cell>
           </md-table-row>
         </md-table-body>
       </md-table>
