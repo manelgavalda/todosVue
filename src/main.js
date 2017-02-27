@@ -10,6 +10,8 @@ import querystring from 'querystring'
 import auth from './services/auth'
 import '../node_modules/sweetalert/dist/sweetalert.min'
 import '../node_modules/sweetalert/dist/sweetalert.css'
+import '../node_modules/roboto-fontface/css/roboto/sass/roboto-fontface-regular.scss'
+import '../node_modules/material-design-icons/iconfont/material-icons.css'
 import routes from './services/routes'
 import sweetAlert from 'sweetalert'
 
