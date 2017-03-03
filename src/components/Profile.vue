@@ -59,7 +59,7 @@
     computed: {
       avatarHash: function () {
         return '7d23ac5a56b02117f12c54f0d98bf6de?s=80'
-        // TODO: return md5 de email(si canvia emial canvia url).
+        // TODO: return md5 de email(si canvia emial canvia url). No fa falta ja que no canviarà.
       }
     },
     created () {
