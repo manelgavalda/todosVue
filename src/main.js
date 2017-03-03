@@ -14,7 +14,9 @@ import '../node_modules/roboto-fontface/css/roboto/sass/roboto-fontface-regular.
 import '../node_modules/material-design-icons/iconfont/material-icons.css'
 import routes from './services/routes'
 import sweetAlert from 'sweetalert'
+import gravatar from 'gravatar'
 
+window.gravatar = gravatar
 window.sweetAlert = sweetAlert
 window.axios = Axios
 window.querystring = querystring

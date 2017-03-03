@@ -43,6 +43,7 @@
 </style>
 <script>
   import todosVue from '../todosVue'
+  import gravatar from 'gravatar'
   export default {
     data () {
       return {
@@ -53,13 +54,13 @@
         createdAt: null,
         updatedAt: null,
         connecting: true,
-        page: 0
+        page: 0,
+        url: ''
       }
     },
     computed: {
       avatarHash: function () {
         return '7d23ac5a56b02117f12c54f0d98bf6de?s=80'
-        // TODO: return md5 de email(si canvia emial canvia url). No fa falta ja que no canviarà.
       }
     },
     created () {
@@ -67,12 +68,16 @@
       this.fetchUserProfile()
     },
     methods: {
+      avatarHash: function () {
+        return gravatar.url(this.email)
+      },
       fetchUserProfile: function () {
         this.$http.get(todosVue.API_PROFILE_URL + this.page).then((response) => {
           this.connecting = false
           this.id = response.data.id
           this.name = response.data.name
           this.email = response.data.email
+          this.avatar = this.avatar(this.url)
           this.createdAt = response.data.created_at
           this.updatedAt = response.data.updated_at
         }, (response) => {
