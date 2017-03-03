@@ -26,9 +26,20 @@
           <md-icon>send</md-icon>
           <router-link to="/tokens">Tokens</router-link>
         </md-list-item>
+
         <md-list-item @click="toggleLeftSidenav">
           <md-icon>account_circle</md-icon>
           <router-link to="/profile">Profile</router-link>
+        </md-list-item>
+
+        <md-list-item @click="toggleLeftSidenav">
+          <md-icon>info</md-icon>
+          <router-link to="/device_info">Device Info</router-link>
+        </md-list-item>
+
+        <md-list-item @click="toggleLeftSidenav">
+          <md-icon>info</md-icon>
+          <router-link to="/contacts">Contacts</router-link>
         </md-list-item>
 
         <md-list-item @click="toggleLeftSidenav">

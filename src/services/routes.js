@@ -2,6 +2,7 @@ import Tokens from '../components/Tokens'
 import Todos from '../components/Todos'
 import Profile from '../components/Profile'
 import NotFound from '../components/NotFound.vue'
+import DeviceInfo from '../components/DeviceInfo.vue'
 import Login from '../components/Login.vue'
 
 const routes = [
@@ -19,6 +20,11 @@ const routes = [
     path: '/profile',
     component: Profile,
     auth: true
+  },
+  {
+    path: '/device',
+    component: DeviceInfo,
+    auth: false
   },
   {
     path: '/login',
