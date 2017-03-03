@@ -22,7 +22,7 @@ const routes = [
     auth: true
   },
   {
-    path: '/device',
+    path: '/device_info',
     component: DeviceInfo,
     auth: false
   },
