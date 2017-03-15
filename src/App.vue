@@ -54,6 +54,9 @@
 <script>
 export default {
   name: 'app',
+  created () {
+    console.log(window.location.href)
+  },
   methods: {
     toggleLeftSidenav () {
       this.$refs.leftSidenav.toggle()
