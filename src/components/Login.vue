@@ -1,21 +1,21 @@
 <template>
-    <md-card>
-        <md-card-header>
-            <div class="md-title">Login</div>
-        </md-card-header>
-        <md-card-content>
-            <md-button class="md-raised md-primary" @click="login" v-show="!authorized">Login</md-button>
-            <md-button class="md-raised md-primary" @click="initLogout" v-show="authorized">Logout</md-button>
-        </md-card-content>
-        <md-dialog-confirm
-                md-title="Logout"
-                md-content="Are you sure you want to logout?"
-                md-ok-text="Ok"
-                md-cancel-text="Cancel"
-                @close="onCloseSureToLogout"
-                ref="sureToLogout">
-        </md-dialog-confirm>
-    </md-card>
+  <md-card>
+    <md-card-header>
+      <div class="md-title">Login</div>
+    </md-card-header>
+    <md-card-content>
+      <md-button class="md-raised md-primary" @click="login" v-show="!authorized">Login</md-button>
+      <md-button class="md-raised md-primary" @click="initLogout" v-show="authorized">Logout</md-button>
+    </md-card-content>
+    <md-dialog-confirm
+      md-title="Logout"
+      md-content="Are you sure you want to logout?"
+      md-ok-text="Ok"
+      md-cancel-text="Cancel"
+      @close="onCloseSureToLogout"
+      ref="sureToLogout">
+    </md-dialog-confirm>
+  </md-card>
 </template>
 <style>
 
@@ -24,7 +24,7 @@
   import todosVue from '../todosVue'
   import auth from '../services/auth'
 
-export default{
+  export default{
     data () {
       return {
         authorized: false
