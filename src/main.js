@@ -41,6 +41,23 @@ const router = new VueRouter({
   routes
 })
 
+// Theme
+
+Vue.material.registerTheme('manel', {
+  primary: {
+    color: 'red',
+    hue: 700
+  },
+  accent: 'black',
+  warn: 'red',
+  background: {
+    color: 'blue',
+    hue: 300
+  }
+})
+
+Vue.material.setCurrentTheme('manel')
+
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

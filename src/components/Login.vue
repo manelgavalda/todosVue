@@ -48,7 +48,28 @@ export default{
           scope: ''
         }
         var query = window.querystring.stringify(query)
-        window.location.replace(todosVue.OAUTH_SERVER_URL + query)
+        if (window.cordova && window.device.platform !== 'browser') {
+          var oAuthWindow = window.cordova.InAppBrowser.open(todosVue.OAUTH_SERVER_URL + query, '_blank', 'location=yes')
+          var login = this
+          oAuthWindow.addEventListener('loadstart', function (e) {
+            var url = e.url
+            var hash = null
+            if (url.split('#'[1])) {
+              hash = url.split('#')[1]
+            }
+            if (hash) {
+              var accessToken = login.extractToken('#' + String(hash[1]))
+              if (accessToken) {
+                auth.saveToken(accessToken)
+                login.authorized = true
+                // TODO tancar aplicació si fallta també o bloquejarà la pantalla.
+                oAuthWindow.close()
+              }
+            }
+          })
+        } else {
+          window.location.replace(todosVue.OAUTH_SERVER_URL + query)
+        }
       },
       logout: function () {
         window.localStorage.removeItem(todosVue.STORAGE_TOKEN_KEY)

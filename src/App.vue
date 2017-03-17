@@ -56,8 +56,10 @@ export default {
   name: 'app',
   created () {
     console.log(window.location.href)
+    document.addEventListener('deviceready', this.onDeviceReady, false)
   },
   methods: {
+
     toggleLeftSidenav () {
       this.$refs.leftSidenav.toggle()
     },
@@ -66,6 +68,9 @@ export default {
     },
     close (ref) {
       console.log('Closed: ' + ref)
+    },
+    onDeviceReady  () {
+      console.log('Working on platform' + window.device.platform)
     }
   }
 }
