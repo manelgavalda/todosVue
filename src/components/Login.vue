@@ -60,7 +60,7 @@
             if (hash) {
               var accessToken = login.extractToken('#' + String(hash))
               if (accessToken) {
-                auth.saveToken(accessToken)
+                login.saveToken(accessToken)
                 login.authorized = true
                 // TODO tancar aplicació si fallta també o bloquejarà la pantalla.
                 oAuthWindow.close()
