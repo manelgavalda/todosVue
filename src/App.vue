@@ -52,6 +52,7 @@
   </div>
 </template>
 <script>
+  import notifications from './services/notifications'
 export default {
   name: 'app',
   created () {
@@ -71,6 +72,7 @@ export default {
     },
     onDeviceReady  () {
       console.log('Working on platform' + window.device.platform)
+      notifications.enable()
     }
   }
 }
