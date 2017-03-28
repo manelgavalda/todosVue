@@ -32,6 +32,7 @@ export default {
         // Save new registration ID
         localStorage.setItem('registrationId', data.registrationId)
         // Post registrationId to your app server as the value has changed
+        // TODO: Axios.post (utl todos backend en explotació)
       }
     })
   },
@@ -41,23 +42,10 @@ export default {
     })
 
     app.push.on('notification', function (data) {
-      console.log('Notification event RECEIVED!!!!!!!!!!!!')
+      console.log('Notification event received')
       console.log('Title: ' + data.title)
       console.log('Message: ' + data.message)
       console.log('Foreground: ' + data.additionalData.foreground)
-      // var cards = document.getElementById("cards");
-      // var push = '<div class="row">' +
-      //   '<div class="col s12 m6">' +
-      //   '  <div class="card darken-1">' +
-      //   '    <div class="card-content black-text">' +
-      //   '      <span class="card-title black-text">' + data.title + '</span>' +
-      //   '      <p>' + data.message + '</p>' +
-      //   '      <p>' + data.additionalData.foreground + '</p>' +
-      //   '    </div>' +
-      //   '  </div>' +
-      //   ' </div>' +
-      //   '</div>';
-      // cards.innerHTML += push;
     })
   }
 }

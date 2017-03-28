@@ -52,7 +52,7 @@
   </div>
 </template>
 <script>
-  import notifications from './services/notifications'
+import notifications from './services/notifications'
 export default {
   name: 'app',
   created () {
@@ -60,7 +60,6 @@ export default {
     document.addEventListener('deviceready', this.onDeviceReady, false)
   },
   methods: {
-
     toggleLeftSidenav () {
       this.$refs.leftSidenav.toggle()
     },
