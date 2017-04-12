@@ -7,6 +7,11 @@ import Login from '../components/Login.vue'
 
 const routes = [
   {
+    path: '/',
+    component: Login,
+    auth: false
+  },
+  {
     path: '/todos',
     component: Todos,
     auth: true
