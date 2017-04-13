@@ -1,9 +1,11 @@
 import Tokens from '../components/Tokens'
 import Todos from '../components/Todos'
 import Profile from '../components/Profile'
-import NotFound from '../components/NotFound.vue'
-import DeviceInfo from '../components/DeviceInfo.vue'
-import Login from '../components/Login.vue'
+import NotFound from '../components/NotFound'
+import DeviceInfo from '../components/DeviceInfo'
+import Login from '../components/Login'
+import Notifications from '../components/Notifications'
+import Cordova from '../components/Cordova'
 
 const routes = [
   {
@@ -31,10 +33,19 @@ const routes = [
     component: DeviceInfo,
     auth: false
   },
+  { path: '/cordova',
+    component: Cordova,
+    meta: { auth: false }
+  },
   {
     path: '/login',
     component: Login,
     auth: false
+  },
+  { path: '/notifications',
+    component: Notifications,
+    // props: Notifications.get(),
+    meta: { auth: false }
   },
   {
     path: '*',

@@ -38,17 +38,25 @@
         </md-list-item>
 
         <md-list-item @click="toggleLeftSidenav">
-          <md-icon>info</md-icon>
-          <router-link to="/contacts">Contacts</router-link>
+          <md-icon>android</md-icon>
+          <router-link exact  to="/cordova" >Cordova</router-link>
         </md-list-item>
 
         <md-list-item @click="toggleLeftSidenav">
-          <md-icon>input</md-icon> <router-link exact  to="/login" >Login/Logout</router-link>
+          <md-icon>priority_high</md-icon>
+          <router-link exact  to="/notifications" >Notifications</router-link>
+        </md-list-item>
+
+        <md-list-item @click="toggleLeftSidenav">
+          <md-icon>input</md-icon>
+          <router-link exact  to="/login" >Login/Logout</router-link>
         </md-list-item>
 
       </md-list>
     </md-sidenav>
-    <router-view></router-view>
+    <transition name="fade">
+      <router-view></router-view>
+    </transition>
   </div>
 </template>
 <script>
@@ -77,4 +85,10 @@ export default {
 }
 </script>
 <style>
+  .fade-enter-active, .fade-leave-active {
+    transition: opacity .3s
+  }
+  .fade-enter, .fade-leave-to /* .fade-leave-active in <2.1.8 */ {
+    opacity: 0
+  }
 </style>
