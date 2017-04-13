@@ -8,13 +8,10 @@ import VueRouter from 'vue-router'
 import Axios from 'axios'
 import querystring from 'querystring'
 import auth from './services/auth'
-import 'sweetalert/dist/sweetalert.min'
-import 'sweetalert/dist/sweetalert.css'
 import 'animate.css/animate.min.css'
 import 'roboto-fontface/css/roboto/roboto-fontface.css'
 import 'material-design-icons/iconfont/material-icons.css'
 import routes from './services/routes'
-import sweetAlert from 'sweetalert'
 import gravatar from 'gravatar'
 
 window.gravatar = gravatar

@@ -97,7 +97,6 @@
           this.connecting = false
           this.showConnectionError()
           this.authorized = false
-          window.sweetAlert('Oops...', 'Something went wrong!', 'error')
         })
       },
       showConnectionError () {
@@ -118,7 +117,6 @@
           closeOnConfirm: false
         },
         function () {
-          window.swal('Deleted!', 'Your task has been deleted.', 'success')
           out.deleteTodoApi(id)
           out.fetchPage(out.page)
         })
@@ -127,7 +125,6 @@
         this.$http.delete(todosVue.API_TASK_URL + '/' + id).then((response) => {
           console.log(response)
         }, (response) => {
-          window.sweetAlert('Oops...', 'Something went wrong!', 'error')
           console.log(response)
         })
       }

@@ -66,7 +66,6 @@
       },
       logout: function () {
         window.localStorage.removeItem(todosVue.STORAGE_TOKEN_KEY)
-        // window.sweetAlert('Oops...', 'Something went wrong!', 'error')
         this.authorized = false
       },
       initLogout: function () {

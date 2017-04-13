@@ -37,6 +37,11 @@
             <md-button>Action</md-button>
             <md-button>Action</md-button>
         </md-card-actions>
+
+      <md-snackbar md-position="bottom center" ref="connectionError" md-duration="4000">
+        <span>Connection error. Please reconnect using connect button!.</span>
+      </md-snackbar>
+
     </md-card>
 </template>
 <style>
@@ -83,7 +88,6 @@
         }, (response) => {
           this.connecting = false
           this.showConnectionError()
-          window.sweetAlert('Oops...', 'Something went wrong!', 'error')
         })
       },
       showConnectionError () {
