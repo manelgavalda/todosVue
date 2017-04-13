@@ -15,7 +15,6 @@ import routes from './services/routes'
 import gravatar from 'gravatar'
 
 window.gravatar = gravatar
-window.sweetAlert = sweetAlert
 window.axios = Axios
 window.querystring = querystring
 Vue.prototype.$http = Axios
