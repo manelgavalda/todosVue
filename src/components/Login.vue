@@ -34,12 +34,6 @@
       extractToken: function (hash) {
         return hash.match(/#(?:access_token)=([\S\s]*?)&/)[1]
       },
-      saveToken: function (token) {
-        window.localStorage.setItem(todosVue.STORAGE_TOKEN_KEY, token)
-      },
-      fetchToken: function () {
-        return window.localStorage.getItem(todosVue.STORAGE_TOKEN_KEY)
-      },
       login: function () {
         query = {
           client_id: todosVue.OAUTH_CLIENT_ID,
@@ -60,9 +54,8 @@
             if (hash) {
               var accessToken = login.extractToken('#' + String(hash))
               if (accessToken) {
-                login.saveToken(accessToken)
+                auth.saveToken(accessToken)
                 login.authorized = true
-                // TODO tancar aplicació si fallta també o bloquejarà la pantalla.
                 oAuthWindow.close()
               }
             }
@@ -73,8 +66,6 @@
       },
       logout: function () {
         window.localStorage.removeItem(todosVue.STORAGE_TOKEN_KEY)
-        // TODO: only if HTTP response code 401
-        // TODO: mostrar amb una bona UI/UE -> SweetAlert
         // window.sweetAlert('Oops...', 'Something went wrong!', 'error')
         this.authorized = false
       },
@@ -90,7 +81,7 @@
     },
     created () {
       if (document.location.hash) var token = this.extractToken(document.location.hash)
-      if (token) this.saveToken(token)
+      if (token) auth.saveToken(token)
       if (this.token == null) this.token = auth.getToken()
       if (this.token) {
         this.authorized = true
