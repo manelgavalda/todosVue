@@ -70,9 +70,9 @@
         page: 0,
         url: '',
         config: {
-          errorLabel: 'An error has occured!',
-          startLabel: 'Swipe to refresh',
-          readyLabel: 'Release to refresh',
+          errorLabel: 'Error',
+          startLabel: 'Swipe',
+          readyLabel: 'Release',
           loadingLabel: 'Refreshing...'
         }
       }
