@@ -1,4 +1,6 @@
 <template>
+
+  <vue-pull-refresh :on-refresh="onRefresh" :config="config">
     <md-card md-with-hover>
         <md-card-header>
             <md-avatar>
@@ -43,13 +45,19 @@
       </md-snackbar>
 
     </md-card>
+  </vue-pull-refresh>
 </template>
 <style>
 </style>
 <script>
   import todosVue from '../todosVue'
   import gravatar from 'gravatar'
+  import VuePullRefresh from 'vue-pull-refresh'
+
   export default {
+    components: {
+      'vue-pull-refresh': VuePullRefresh
+    },
     data () {
       return {
         avatar: 'https://s.gravatar.com/avatar/7d23ac5a56b02117f12c54f0d98bf6de?s=80',
@@ -60,7 +68,13 @@
         updatedAt: null,
         connecting: true,
         page: 0,
-        url: ''
+        url: '',
+        config: {
+          errorLabel: 'An error has occured!',
+          startLabel: 'Swipe to refresh',
+          readyLabel: 'Release to refresh',
+          loadingLabel: 'Refreshing...'
+        }
       }
     },
     computed: {
@@ -92,6 +106,18 @@
       },
       showConnectionError () {
         this.$refs.connectionError.open()
+      },
+      onRefresh: function () {
+        this.connecting = true
+        return new Promise(function (resolve, reject) {
+          setTimeout(function () {
+            resolve()
+          }, 1000)
+        }).then(() => {
+          this.fetchUserProfile()
+        }).catch(() => {
+          this.showConnectionError()
+        })
       }
     }
   }

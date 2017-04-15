@@ -1,5 +1,6 @@
 <template>
   <div>
+    <vue-pull-refresh :on-refresh="onRefresh" :config="config">
     <md-table-card>
       <md-toolbar>
         <h1 class="md-title">Todos</h1>
@@ -56,15 +57,20 @@
       <span>Connection error. Please reconnect using connect button!.</span>
     </md-snackbar>
 
+    </vue-pull-refresh>
   </div>
 </template>
 <style>
 </style>
 <script>
   import todosVue from '../todosVue'
+  import VuePullRefresh from 'vue-pull-refresh'
 
   export default{
 //    props: ['todo', 'index', 'from'],
+    components: {
+      'vue-pull-refresh': VuePullRefresh
+    },
     data () {
       return {
         todos: [],
@@ -72,7 +78,13 @@
         connecting: false,
         total: 0,
         perPage: 0,
-        page: 0
+        page: 0,
+        config: {
+          errorLabel: 'An error has occured!',
+          startLabel: 'Swipe to refresh',
+          readyLabel: 'Release to refresh',
+          loadingLabel: 'Refreshing...'
+        }
       }
     },
     created () {
@@ -107,19 +119,9 @@
       },
       deleteTodo: function (index, id) {
         var out = this
-        window.swal({
-          title: 'Are you sure?',
-          text: 'You will not be able to recover this task!',
-          type: 'warning',
-          showCancelButton: true,
-          confirmButtonColor: '#DD6B55',
-          confirmButtonText: 'Yes, delete it!',
-          closeOnConfirm: false
-        },
-        function () {
-          out.deleteTodoApi(id)
-          out.fetchPage(out.page)
-        })
+        out.deleteTodoApi(id)
+        out.fetchPage(out.page)
+        out.fetchData()
       },
       deleteTodoApi: function (id) {
         this.$http.delete(todosVue.API_TASK_URL + '/' + id).then((response) => {
@@ -127,7 +129,7 @@
         }, (response) => {
           console.log(response)
         })
-      }
+      },
 //      editTodoApi: function () {
 //        this.$http.put(this.uri + '/' + this.todo.id, {
 //          name: this.todo.name,
@@ -144,6 +146,18 @@
 //        this.editing = true
 //        return this.editing
 //      }
+      onRefresh: function () {
+        this.connecting = true
+        return new Promise(function (resolve, reject) {
+          setTimeout(function () {
+            resolve()
+          }, 1000)
+        }).then(() => {
+          this.fetchData()
+        }).catch(() => {
+          this.showConnectionError()
+        })
+      }
     }
   }
 // Traure nom del usuari i la seva foto amb les metadades que retorna el todosBackend.
