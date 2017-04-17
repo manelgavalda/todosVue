@@ -5,6 +5,18 @@ import todosVue from '../todosVue'
 import app from '../App.vue'
 
 export default {
+  get () {
+    return {
+      notifications: this.fetchNotifications()
+    }
+  },
+  fetchNotifications: function () {
+    this.$http.get(todosVue.GET_MESSAGES_URL).then((response) => {
+      return response.data
+    }, (error) => {
+      console.log('error: ' + error)
+    })
+  },
   enable () {
     console.log('Enabling notifications')
     this.initPushNotifications()

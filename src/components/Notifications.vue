@@ -13,7 +13,19 @@
 </style>
 <script>
 //  import todosVue from '../todosVue'
+  import notifications from '../services/notifications'
   export default{
+    created () {
+      document.addEventListener('deviceready', this.onDeviceReady, false)
+    },
+    methods: {
+      onDeviceReady  () {
+        console.log('Working on platform' + window.device.platform)
+        notifications.enable()
+        console.log('Data')
+        console.log(notifications.processPushNotifications())
+      }
+    },
     props: {
       notifications: {
         type: Array,
