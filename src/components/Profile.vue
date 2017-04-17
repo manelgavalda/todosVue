@@ -7,8 +7,9 @@
                 <img :src="avatar" alt="Manel Gavaldà Andreu">
             </md-avatar>
 
-            <div class="md-title">{{name}}</div>
-            <div class="md-subhead">Manel</div>
+            <div class="md-subhead">Username</div>
+            {{name}}
+
         </md-card-header>
 
         <md-card-content>
@@ -60,7 +61,7 @@
     },
     data () {
       return {
-        avatar: 'https://s.gravatar.com/avatar/7d23ac5a56b02117f12c54f0d98bf6de?s=80',
+        avatar: '',
         id: null,
         name: null,
         email: null,
@@ -77,26 +78,18 @@
         }
       }
     },
-    computed: {
-      avatarHash: function () {
-        return '7d23ac5a56b02117f12c54f0d98bf6de?s=80'
-      }
-    },
     created () {
       console.log('Component profile created')
       this.fetchUserProfile()
     },
     methods: {
-      avatarHash: function () {
-        return gravatar.url(this.email)
-      },
       fetchUserProfile: function () {
-        this.$http.get(todosVue.API_PROFILE_URL + this.page).then((response) => {
+        this.$http.get(todosVue.API_PROFILE_URL).then((response) => {
           this.connecting = false
           this.id = response.data.id
           this.name = response.data.name
           this.email = response.data.email
-          this.avatar = this.avatar(this.url)
+          this.avatar = gravatar.url(this.email)
           this.createdAt = response.data.created_at
           this.updatedAt = response.data.updated_at
         }, (response) => {
