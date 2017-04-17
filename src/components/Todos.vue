@@ -29,7 +29,17 @@
           <md-table-row v-for="(todo, index) in todos" md-auto-select md-selection>
             <md-table-cell>{{ index +1 }} {{ todo.name }}</md-table-cell>
             <md-table-cell>{{ todo.priority }}</md-table-cell>
-            <md-table-cell>{{ todo.done }}</md-table-cell>
+
+
+            <md-table-cell>
+              <span v-if="todo.done">
+                <md-switch v-model="todo.done" id="done" name="done" class="md-primary" @click.native="setDone(todo.done, todo.id)"></md-switch>
+              </span>
+              <span v-else>
+                <md-switch v-model="todo.done" id="done" name="done" class="md-primary" @click.native="setDone(todo.done, todo.id)"></md-switch>
+              </span>
+            </md-table-cell>
+
             <md-table-cell>
               <span class="btn btn-md btn-danger"  @click="deleteTodo(index,todo.id)">
                 <md-icon>delete_forever</md-icon>
@@ -95,6 +105,10 @@
       }, 500)
     },
     methods: {
+      setDone: function (done, id) {
+        this.done = done
+        this.editTodoApi(id)
+      },
       fetchData: function () {
         return this.fetchPage(1)
       },
@@ -130,22 +144,18 @@
           console.log(response)
         })
       },
-//      editTodoApi: function () {
-//        this.$http.put(this.uri + '/' + this.todo.id, {
-//          name: this.todo.name,
-//          priority: this.todo.priority,
-//          done: this.todo.done
-//        }).then((response) => {
-//          console.log(response)
-//        }, (response) => {
-//          window.sweetAlert('Oops...', 'Something went wrong!', 'error')
-//          console.log(response)
-//        })
-//      },
-//      editTodo: function () {
-//        this.editing = true
-//        return this.editing
-//      }
+      editTodoApi: function (id) {
+        this.$http.put(todosVue.API_TASK_URL + '/' + id, {
+          name: this.name,
+          priority: this.priority,
+          done: this.done
+        }).then((response) => {
+          console.log(response)
+        }, (response) => {
+          window.sweetAlert('Oops...', 'Something went wrong!', 'error')
+          console.log(response)
+        })
+      },
       onRefresh: function () {
         this.connecting = true
         return new Promise(function (resolve, reject) {
