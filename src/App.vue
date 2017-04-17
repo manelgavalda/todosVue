@@ -19,22 +19,22 @@
       <md-list>
         <md-list-item @click="toggleLeftSidenav">
           <md-icon>move_to_inbox</md-icon>
-          <router-link to="/todos">Todos</router-link>
+          <router-link exact to="/todos">Todos</router-link>
         </md-list-item>
 
         <md-list-item @click="toggleLeftSidenav">
           <md-icon>send</md-icon>
-          <router-link to="/tokens">Tokens</router-link>
+          <router-link exact to="/tokens">Tokens</router-link>
         </md-list-item>
 
         <md-list-item @click="toggleLeftSidenav">
           <md-icon>account_circle</md-icon>
-          <router-link to="/profile">Profile</router-link>
+          <router-link exact to="/profile">Profile</router-link>
         </md-list-item>
 
         <md-list-item @click="toggleLeftSidenav">
           <md-icon>info</md-icon>
-          <router-link to="/device_info">Device Info</router-link>
+          <router-link exact to="/device_info">Device Info</router-link>
         </md-list-item>
 
         <md-list-item @click="toggleLeftSidenav">
