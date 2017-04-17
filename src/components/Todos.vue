@@ -42,7 +42,7 @@
 
             <md-table-cell>
               <span class="btn btn-md btn-danger"  @click="deleteTodo(index,todo.id)">
-                <md-icon>delete_forever</md-icon>
+                <md-button><md-icon>delete_forever</md-icon></md-button>
               </span>
               <!--<span class="btn btn-md btn-info" @click="editTodo(index,todo.id)">-->
                 <!--<md-icon>edit</md-icon>-->
