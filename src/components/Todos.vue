@@ -26,7 +26,7 @@
         <md-spinner :md-size="150" md-indeterminate  class="md-accent" v-show="connecting" ></md-spinner>
 
         <md-table-body>
-          <md-table-row v-for="(todo, index) in todos" md-auto-select md-selection>
+          <md-table-row v-for="(todo, index) in todos">
             <md-table-cell>{{ index +1 }} {{ todo.name }}</md-table-cell>
             <md-table-cell>{{ todo.priority }}</md-table-cell>
 
