@@ -1,7 +1,7 @@
 <template>
   <div class="phone-viewport">
     <md-toolbar>
-      <md-button class="md-icon-button" @click="toggleLeftSidenav">
+      <md-button class="md-icon-button" @click.native="toggleLeftSidenav">
         <md-icon>menu</md-icon>
       </md-button>
 
@@ -9,7 +9,7 @@
     </md-toolbar>
 
 
-    <md-sidenav class="md-left" ref="leftSidenav" @open="open('Left')" @close="close('Left')">
+    <md-sidenav class="md-left" ref="leftSidenav" @open="open('Left')" @close="close('Left')" md-swipeable>
       <md-toolbar class="md-large">
         <div class="md-toolbar-container">
           <h3 class="md-title">Todos</h3>
@@ -17,39 +17,32 @@
       </md-toolbar>
 
       <md-list>
-        <md-list-item @click="toggleLeftSidenav">
-          <md-icon>move_to_inbox</md-icon>
-          <router-link exact to="/todos">Todos</router-link>
+        <md-list-item>
+          <router-link @click.native="toggleLeftSidenav" exact to="/todos">Todos <md-icon>move_to_inbox</md-icon></router-link>
         </md-list-item>
 
-        <md-list-item @click="toggleLeftSidenav">
-          <md-icon>send</md-icon>
-          <router-link exact to="/tokens">Tokens</router-link>
+        <md-list-item>
+          <router-link @click.native="toggleLeftSidenav" exact to="/tokens">Tokens <md-icon>send</md-icon> </router-link>
         </md-list-item>
 
-        <md-list-item @click="toggleLeftSidenav">
-          <md-icon>account_circle</md-icon>
-          <router-link exact to="/profile">Profile</router-link>
+        <md-list-item>
+          <router-link @click.native="toggleLeftSidenav" exact to="/profile">Profile <md-icon>account_circle</md-icon> </router-link>
         </md-list-item>
 
-        <md-list-item @click="toggleLeftSidenav">
-          <md-icon>info</md-icon>
-          <router-link exact to="/device_info">Device Info</router-link>
+        <md-list-item>
+          <router-link @click.native="toggleLeftSidenav" exact to="/device_info">Device Info <md-icon>info</md-icon></router-link>
         </md-list-item>
 
-        <md-list-item @click="toggleLeftSidenav">
-          <md-icon>android</md-icon>
-          <router-link exact  to="/cordova" >Cordova</router-link>
+        <md-list-item>
+          <router-link @click.native="toggleLeftSidenav" exact  to="/cordova" >Cordova <md-icon>android</md-icon></router-link>
         </md-list-item>
 
-        <md-list-item @click="toggleLeftSidenav">
-          <md-icon>priority_high</md-icon>
-          <router-link exact  to="/notifications" >Notifications</router-link>
+        <md-list-item >
+          <router-link @click.native="toggleLeftSidenav" exact  to="/notifications" >Notifications <md-icon>priority_high</md-icon></router-link>
         </md-list-item>
 
-        <md-list-item @click="toggleLeftSidenav">
-          <md-icon>input</md-icon>
-          <router-link exact  to="/login" >Login/Logout</router-link>
+        <md-list-item>
+          <router-link @click.native="toggleLeftSidenav" exact  to="/login" >Login/Logout <md-icon>input</md-icon></router-link>
         </md-list-item>
 
       </md-list>

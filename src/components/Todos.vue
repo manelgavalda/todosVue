@@ -129,7 +129,7 @@
         this.$refs.connectionError.open()
       },
       onPagination: function () {
-        console.log('pagination todo!')
+        this.fetchPage(this.page += 1)
       },
       deleteTodo: function (index, id) {
         var out = this
