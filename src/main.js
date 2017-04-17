@@ -8,11 +8,10 @@ import VueRouter from 'vue-router'
 import Axios from 'axios'
 import querystring from 'querystring'
 import auth from './services/auth'
+import router from './services/router'
 import 'animate.css/animate.min.css'
 import 'roboto-fontface/css/roboto/roboto-fontface.css'
 import 'material-design-icons/iconfont/material-icons.css'
-// import Scroller from 'vue-scroller'
-import routes from './services/routes'
 import gravatar from 'gravatar'
 
 window.gravatar = gravatar
@@ -22,7 +21,6 @@ Vue.prototype.$http = Axios
 
 Vue.use(VueMaterial)
 Vue.use(VueRouter)
-// Vue.use(Scroller)
 
 window.axios.defaults.headers.common = {
   'X-Requested-With': 'XMLHttpRequest'
@@ -33,12 +31,6 @@ if (auth.loggedIn()) {
     'Authorization': auth.getAuthHeader()
   }
 }
-
-const router = new VueRouter({
-    // history mode html5 per borrar #
-  mode: 'history',
-  routes
-})
 
 // Theme
 

@@ -11,27 +11,27 @@ const routes = [
   {
     path: '/',
     component: Login,
-    auth: false
+    meta: { auth: false }
   },
   {
     path: '/todos',
     component: Todos,
-    auth: true
+    meta: { auth: true }
   },
   {
     path: '/tokens',
     component: Tokens,
-    auth: false
+    meta: { auth: false }
   },
   {
     path: '/profile',
     component: Profile,
-    auth: true
+    meta: { auth: true }
   },
   {
     path: '/device_info',
     component: DeviceInfo,
-    auth: false
+    meta: { auth: false }
   },
   { path: '/cordova',
     component: Cordova,
@@ -40,7 +40,7 @@ const routes = [
   {
     path: '/login',
     component: Login,
-    auth: false
+    meta: { auth: false }
   },
   { path: '/notifications',
     component: Notifications,
@@ -50,7 +50,7 @@ const routes = [
   {
     path: '*',
     component: NotFound,
-    auth: false
+    meta: { auth: false }
   }
 ]
 
