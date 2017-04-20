@@ -111,6 +111,20 @@
         }).catch(() => {
           this.showConnectionError()
         })
+      },
+      openCamera: function (selection) {
+//        var srcType = Camera.PictureSourceType.CAMERA
+//        var options = setOptions(srcType)
+//        var func = createNewFileEntry
+//        if (selection === 'camera-thmb') {
+//          options.targetHeight = 100
+//          options.targetWidth = 100
+//        }
+//        navigator.camera.getPicture(function cameraSuccess (imageUri) {
+//          // Do something
+//        }, function cameraError (error) {
+//          console.debug('Unable to obtain picture: ' + error, 'app')
+//        }, options)
       }
     }
   }

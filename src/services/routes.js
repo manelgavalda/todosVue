@@ -45,7 +45,7 @@ const routes = [
   { path: '/notifications',
     component: Notifications,
     // props: Notifications.get(),
-    meta: { auth: false }
+    meta: { auth: true }
   },
   {
     path: '*',
