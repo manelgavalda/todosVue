@@ -1,6 +1,9 @@
 <template>
   <div>
-    CORDOVA Template
+    <md-button @click.native="testDelay" class="md-raised md-primary">Delay</md-button>
+    <md-button @click.native="testDelay" class="md-raised md-primary">Without Delay</md-button>
+
+    <md-button @click.native="vibrate" class="md-raised md-warn">Vibrate</md-button>
   </div>
 </template>
 <style>
@@ -19,6 +22,17 @@
       },
       onBeforeDestroy () {
         console.log('XIVATO device onBeforeDestroy!')
+      },
+      vibrate () {
+        if (window.cordova && window.device.platform !== 'browser') {
+          navigator.vibrate(3000)
+        } else {
+          console.log('vibration not supported')
+        }
+      },
+      testDelay () {
+        window.alert('TODO')
+        console.log('TODO')
       }
     }
   }
