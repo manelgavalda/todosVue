@@ -17,13 +17,12 @@
   export default{
     created () {
       document.addEventListener('deviceready', this.onDeviceReady, false)
+      notifications.enable()
     },
     methods: {
       onDeviceReady  () {
         console.log('Working on platform' + window.device.platform)
-        notifications.enable()
         console.log('Data')
-        console.log(notifications.processPushNotifications())
       }
     },
     props: {
