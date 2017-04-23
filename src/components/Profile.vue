@@ -3,11 +3,11 @@
   <vue-pull-refresh :on-refresh="onRefresh" :config="config">
     <md-card md-with-hover>
         <md-card-header>
-            <md-avatar>
-                <img :src="avatar" alt="Manel Gavaldà Andreu">
+            <md-avatar @click.native="selectCamera">
+                <img id="profilePicture" :src="avatar" alt="name">
             </md-avatar>
 
-            <div class="md-subhead">Username</div>
+            <div class="md-subhead">Username (Tap avatar to change it)</div>
             {{name}}
 
         </md-card-header>
@@ -80,7 +80,10 @@
     },
     created () {
       console.log('Component profile created')
+    },
+    mounted () {
       this.fetchUserProfile()
+      console.log(window.localStorage.getItem('profilePicture'))
     },
     methods: {
       fetchUserProfile: function () {
@@ -89,7 +92,10 @@
           this.id = response.data.id
           this.name = response.data.name
           this.email = response.data.email
-          this.avatar = gravatar.url(this.email)
+          this.avatar = 'http:' + gravatar.url(this.email)
+          if (window.localStorage.getItem('profilePicture')) {
+            this.avatar = window.localStorage.getItem('profilePicture')
+          }
           this.createdAt = response.data.created_at
           this.updatedAt = response.data.updated_at
         }, (response) => {
@@ -100,7 +106,7 @@
       showConnectionError () {
         this.$refs.connectionError.open()
       },
-      onRefresh: function () {
+      onRefresh () {
         this.connecting = true
         return new Promise(function (resolve, reject) {
           setTimeout(function () {
@@ -112,19 +118,28 @@
           this.showConnectionError()
         })
       },
-      openCamera: function (selection) {
-//        var srcType = Camera.PictureSourceType.CAMERA
-//        var options = setOptions(srcType)
-//        var func = createNewFileEntry
-//        if (selection === 'camera-thmb') {
-//          options.targetHeight = 100
-//          options.targetWidth = 100
-//        }
-//        navigator.camera.getPicture(function cameraSuccess (imageUri) {
-//          // Do something
-//        }, function cameraError (error) {
-//          console.debug('Unable to obtain picture: ' + error, 'app')
-//        }, options)
+      selectCamera () {
+        if (window.cordova && window.device.platform !== 'browser') {
+          this.openCamera()
+        } else {
+          console.log('Camara no soportada')
+        }
+      },
+      openCamera (selection) {
+        navigator.camera.getPicture(onSuccess, onFail, { quality: 50,
+          destinationType: window.Camera.DestinationType.FILE_URI })
+
+        function onSuccess (imageURI) {
+          console.log('Picture Taken')
+          var image = document.getElementById('profilePicture')
+          image.src = imageURI
+          window.localStorage.setItem('profilePicture', imageURI)
+          console.log(image)
+        }
+
+        function onFail (message) {
+          this.showConnectionError()
+        }
       }
     }
   }

@@ -152,7 +152,7 @@
         }).then((response) => {
           console.log(response)
         }, (response) => {
-          window.sweetAlert('Oops...', 'Something went wrong!', 'error')
+//          window.sweetAlert('Oops...', 'Something went wrong!', 'error')
           console.log(response)
         })
       },
