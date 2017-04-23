@@ -2,15 +2,15 @@
 
   <vue-pull-refresh :on-refresh="onRefresh" :config="config">
     <md-card md-with-hover>
-        <md-card-header>
-            <md-avatar @click.native="selectCamera">
-                <img id="profilePicture" :src="avatar" alt="name">
-            </md-avatar>
 
-            <div class="md-subhead">Username (Tap avatar to change it)</div>
-            {{name}}
+      <md-card-header>
+        <md-avatar @click.native="selectCamera">
+            <img id="profilePicture" :src="avatar" alt="name">
+        </md-avatar>
 
-        </md-card-header>
+        <div class="md-subhead">Username (Tap avatar to change it)</div>
+        {{name}}
+      </md-card-header>
 
         <md-card-content>
             <form novalidate @submit.stop.prevent="submit">
@@ -33,12 +33,18 @@
                     <label>Updated at</label>
                     <md-input v-model="updatedAt" placeholder="Your date here"></md-input>
                 </md-input-container>
+
+              <md-input-container>
+                <label>Phone Number</label>
+                <md-input v-model="phone" placeholder="Your phone here"></md-input>
+              </md-input-container>
             </form>
         </md-card-content>
+        <md-spinner :md-size="150" md-indeterminate  class="md-accent" v-show="connecting" ></md-spinner>
 
         <md-card-actions>
-            <md-button>Action</md-button>
-            <md-button>Action</md-button>
+            <md-button @click.native="loadLocation">Get Location</md-button>
+            <md-button @click.native="loadContact">Save Contact</md-button>
         </md-card-actions>
 
       <md-snackbar md-position="bottom center" ref="connectionError" md-duration="4000">
@@ -61,13 +67,14 @@
     },
     data () {
       return {
+        phone: null,
         avatar: '',
         id: null,
         name: null,
         email: null,
         createdAt: null,
         updatedAt: null,
-        connecting: true,
+        connecting: false,
         page: 0,
         url: '',
         config: {
@@ -98,6 +105,7 @@
           }
           this.createdAt = response.data.created_at
           this.updatedAt = response.data.updated_at
+//          this.phone = response.data.phone
         }, (response) => {
           this.connecting = false
           this.showConnectionError()
@@ -122,14 +130,15 @@
         if (window.cordova && window.device.platform !== 'browser') {
           this.openCamera()
         } else {
-          console.log('Camara no soportada')
+          console.log('Camera not supported')
         }
       },
-      openCamera (selection) {
+      openCamera () {
         navigator.camera.getPicture(onSuccess, onFail, { quality: 50,
           destinationType: window.Camera.DestinationType.FILE_URI })
 
         function onSuccess (imageURI) {
+          window.localStorage.setItem('profilePicture', null)
           console.log('Picture Taken')
           var image = document.getElementById('profilePicture')
           image.src = imageURI
@@ -138,8 +147,53 @@
         }
 
         function onFail (message) {
-          this.showConnectionError()
+          window.alert('Error: ' + message)
         }
+      },
+      loadContact () {
+        if (window.cordova && window.device.platform !== 'browser') {
+          this.saveContact()
+        } else {
+          console.log('Contact not supported')
+        }
+      },
+      saveContact () {
+        function onSuccess (contact) {
+          window.alert('Contact Save Success')
+        }
+
+        function onError (contactError) {
+          window.alert('Error =  ' + contactError.code)
+        }
+
+        // create a new contact object
+        var contact = navigator.contacts.create()
+        contact.displayName = contact.nickname = contact.name = this.name
+        contact.phoneNumbers = new window.ContactField('mobile', this.phone, true)
+        console.log(contact)
+        contact.save(onSuccess, onError)
+      },
+      loadLocation () {
+        if (window.cordova && window.device.platform !== 'browser') {
+          this.getLocation()
+        } else {
+          console.log('Geolocation not supported')
+        }
+      },
+      getLocation () {
+        var out = this
+        console.log('Get location')
+        this.connecting = true
+        navigator.geolocation.getCurrentPosition(
+          function (position) {
+            out.connecting = false
+            console.log('Coordinates: ' + position.coords.latitude + ', ' + position.coords.longitude)
+          },
+          function (err) {
+            out.connecting = false
+            window.alert('Error :' + err)
+          },
+          { timeout: 10000 })
       }
     }
   }
