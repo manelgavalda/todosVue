@@ -8,10 +8,14 @@ import Notifications from '../components/Notifications'
 import Cordova from '../components/Cordova'
 
 const routes = [
+  { path: '/android_asset/www/index.html',
+    component: Todos,
+    meta: { auth: true }
+  },
   {
     path: '/',
-    component: Login,
-    meta: { auth: false }
+    component: Todos,
+    meta: { auth: true }
   },
   {
     path: '/todos',
