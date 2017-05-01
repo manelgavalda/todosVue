@@ -13,7 +13,6 @@ import 'animate.css/animate.min.css'
 import 'roboto-fontface/css/roboto/roboto-fontface.css'
 import 'material-design-icons/iconfont/material-icons.css'
 import gravatar from 'gravatar'
-import 'fastclick/lib/fastclick.js'
 
 window.gravatar = gravatar
 window.axios = Axios

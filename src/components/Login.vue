@@ -81,10 +81,13 @@
     created () {
       if (document.location.hash) var token = this.extractToken(document.location.hash)
       if (token) auth.saveToken(token)
-      if (this.token == null) this.token = auth.getToken()
+      if (this.token == null) this.token = window.localStorage.getItem(todosVue.STORAGE_TOKEN_KEY)
+    },
+    mounted () {
       if (this.token) {
         this.authorized = true
         this.$http.defaults.headers.common['Authorization'] = auth.getAuthHeader()
+        console.log(auth.getAuthHeader())
       } else {
         this.authorized = false
         this.$http.defaults.headers.common['Authorization'] = ''

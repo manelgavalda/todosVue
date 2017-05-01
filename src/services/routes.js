@@ -9,8 +9,8 @@ import Cordova from '../components/Cordova'
 
 const routes = [
   { path: '/android_asset/www/index.html',
-    component: Todos,
-    meta: { auth: true }
+    component: Login,
+    meta: { auth: false }
   },
   {
     path: '/',

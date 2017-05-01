@@ -1,8 +1,9 @@
 <template>
   <div>
-    <md-button @click.native="testDelay" class="md-raised md-primary">Delay</md-button>
-    <md-button @click.native="testDelay" class="md-raised md-primary">Without Delay</md-button>
-
+    <md-button @click.native="delay" class="md-raised md-primary">Delay</md-button>
+    <md-list>
+      <p v-show="delayTry">Delay Interval: {{ delayTime }}ms.</p>
+    </md-list>
     <md-button @click.native="vibrate" class="md-raised md-warn">Vibrate</md-button>
   </div>
 </template>
@@ -10,6 +11,13 @@
 </style>
 <script>
   export default{
+    data () {
+      return {
+        delayTry: false,
+        delayTime: null,
+        cTime: null
+      }
+    },
     created () {
       document.addEventListener('deviceready', this.onDeviceReady, false)
     },
@@ -30,9 +38,9 @@
           console.log('vibration not supported')
         }
       },
-      testDelay () {
-        window.alert('TODO')
-        console.log('TODO')
+      delay () {
+        this.delayTry = true
+        this.delayTime = this.cTime - Date.now()
       }
     }
   }

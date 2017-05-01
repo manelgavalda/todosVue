@@ -14,30 +14,46 @@
 
         <md-card-content>
             <form novalidate @submit.stop.prevent="submit">
-                <md-input-container>
-                    <label>Name</label>
-                    <md-input v-model="name" placeholder="Put your name here"></md-input>
-                </md-input-container>
+              <md-input-container>
+                  <label>Name</label>
+                  <md-input v-model="name" placeholder="Put your name here"></md-input>
+              </md-input-container>
 
-                <md-input-container>
-                    <label>Email</label>
-                    <md-input v-model="email" placeholder="Put your email here"></md-input>
-                </md-input-container>
+              <md-input-container>
+                  <label>Email</label>
+                  <md-input v-model="email" placeholder="Put your email here"></md-input>
+              </md-input-container>
 
-                <md-input-container>
-                    <label>Created at</label>
-                    <md-input v-model="createdAt" placeholder="Your date here"></md-input>
-                </md-input-container>
+              <md-input-container>
+                  <label>Created at</label>
+                  <md-input v-model="createdAt" placeholder="Your date here"></md-input>
+              </md-input-container>
 
-                <md-input-container>
-                    <label>Updated at</label>
-                    <md-input v-model="updatedAt" placeholder="Your date here"></md-input>
-                </md-input-container>
+              <md-input-container>
+                  <label>Updated at</label>
+                  <md-input v-model="updatedAt" placeholder="Your date here"></md-input>
+              </md-input-container>
+
+              <md-input-container>
+                <label>Updated at</label>
+                <md-input v-model="updatedAt" placeholder="Your date here"></md-input>
+              </md-input-container>
 
               <md-input-container>
                 <label>Phone Number</label>
                 <md-input v-model="phone" placeholder="Your phone here"></md-input>
               </md-input-container>
+
+              <md-input-container>
+                <label>Latitude</label>
+                <md-input v-model="latitude" placeholder="Latitude"></md-input>
+              </md-input-container>
+
+              <md-input-container>
+                <label>Longitude</label>
+                <md-input v-model="longitude" placeholder="Longitude"></md-input>
+              </md-input-container>
+
             </form>
         </md-card-content>
         <md-spinner :md-size="150" md-indeterminate  class="md-accent" v-show="connecting" ></md-spinner>
@@ -67,6 +83,8 @@
     },
     data () {
       return {
+        latitude: window.localStorage.getItem('latitude'),
+        longitude: window.localStorage.getItem('longitude'),
         phone: null,
         avatar: '',
         id: null,
@@ -188,6 +206,8 @@
           function (position) {
             out.connecting = false
             console.log('Coordinates: ' + position.coords.latitude + ', ' + position.coords.longitude)
+            window.localStorage.setItem('latitude', position.coords.latitude)
+            window.localStorage.setItem('longitude', position.coords.longitude)
           },
           function (err) {
             out.connecting = false

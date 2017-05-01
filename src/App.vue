@@ -45,6 +45,10 @@
           <router-link @click.native="toggleLeftSidenav" exact  to="/login" >Login/Logout <md-icon>input</md-icon></router-link>
         </md-list-item>
 
+        <md-list-item>
+          <router-link @click.native="closeApp" exact to="/exit">Close Application <md-icon>cancel</md-icon></router-link>
+        </md-list-item>
+
       </md-list>
     </md-sidenav>
     <transition name="fade">
@@ -53,11 +57,12 @@
   </div>
 </template>
 <script>
-// import notifications from './services/notifications'
+import auth from './services/auth'
 export default {
   name: 'app',
   created () {
     console.log(window.location.href)
+
     document.addEventListener('deviceready', this.onDeviceReady, false)
   },
   methods: {
@@ -66,6 +71,8 @@ export default {
     },
     open (ref) {
       console.log('Opened: ' + ref)
+      // Cutre
+      this.$http.defaults.headers.common['Authorization'] = auth.getAuthHeader()
     },
     close (ref) {
       console.log('Closed: ' + ref)
@@ -73,6 +80,20 @@ export default {
     onDeviceReady  () {
       console.log('Working on platform' + window.device.platform)
 //      notifications.enable()
+    },
+    closeApp () {
+      navigator.notification.confirm(
+        'Do you want to close the aplication?',
+        this.onConfirmQuit,
+        'QUIT',
+        'OK,Cancel'
+      )
+    },
+    onConfirmQuit (button) {
+      console.log(button)
+      if (button === 1) {
+        navigator.app.exitApp()
+      }
     }
   }
 }
